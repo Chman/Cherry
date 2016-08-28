@@ -149,21 +149,21 @@ foreach ($feeds as $feed) {
                 continue;
 
             // Skip if item exists
-			if (in_array_deep($id, 'id', $output))
-				continue;
+            if (in_array_deep($id, 'id', $output))
+                continue;
 
-			$item_url = $item->getUrl();
-			$content = '';
+            $item_url = $item->getUrl();
+            $content = '';
 
-			if ($scraper)
-			{
-				$grabber->setUrl($item_url);
-				$grabber->execute();
-				$content = $grabber->hasRelevantContent()
-					? $grabber->getFilteredContent()
-					: $item->getContent();
-			}
-			else $content = $item->getContent();
+            if ($scraper)
+            {
+                $grabber->setUrl($item_url);
+                $grabber->execute();
+                $content = $grabber->hasRelevantContent()
+                    ? $grabber->getFilteredContent()
+                    : $item->getContent();
+            }
+            else $content = $item->getContent();
 
             $output[] = array(
                 'source' => $name,
@@ -179,7 +179,7 @@ foreach ($feeds as $feed) {
             $count++;
         }
 
-		$items_added += $count;
+        $items_added += $count;
 
         info('Parsed "' . $name . '" (' . $count . ' items)');
     }
