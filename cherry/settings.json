@@ -1,0 +1,19 @@
+{
+    "time_limit": "1 week ago",
+    "database": "feeds.json",
+    "timeout": 5,
+    "user_agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36",
+    "feeds":
+    [
+        {
+            "name": "Slashdot",
+            "url": "http://rss.slashdot.org/Slashdot/slashdotMain",
+            "scraper": true
+        },
+        {
+            "name": "Anandtech",
+            "url": "http://www.anandtech.com/rss/",
+            "scraper": false
+        }
+    ]
+}
