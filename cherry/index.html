@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
 	<head>
@@ -15,31 +14,31 @@
 
 	<body>
 		<div id="wrapper">
-            <div id="loader">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                    <defs>
-                        <filter id="gooey">
-                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
-                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo"></feColorMatrix>
-                            <feBlend in="SourceGraphic" in2="goo"></feBlend>
-                        </filter>
-                    </defs>
-                </svg>
-                <div class="blob blob-0"></div>
-                <div class="blob blob-1"></div>
-                <div class="blob blob-2"></div>
-                <div class="blob blob-3"></div>
-                <div class="blob blob-4"></div>
-                <div class="blob blob-5"></div>
-            </div>
-        </div>
+			<div id="loader">
+				<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+					<defs>
+						<filter id="gooey">
+							<feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+							<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo"></feColorMatrix>
+							<feBlend in="SourceGraphic" in2="goo"></feBlend>
+						</filter>
+					</defs>
+				</svg>
+				<div class="blob blob-0"></div>
+				<div class="blob blob-1"></div>
+				<div class="blob blob-2"></div>
+				<div class="blob blob-3"></div>
+				<div class="blob blob-4"></div>
+				<div class="blob blob-5"></div>
+			</div>
+		</div>
 
-        <script type="t/template" id="template-date">
-            <h2 class="datetime">{{=date}}</h2>
-            <div class="separator"></div>
-        </script>
+		<script type="t/template" id="template-date">
+			<h2 class="datetime">{{=date}}</h2>
+			<div class="separator"></div>
+		</script>
 
-        <script type="t/template" id="template-item">
+		<script type="t/template" id="template-item">
 			<div class="entry" data-id="{{=guid}}">
 				<div class="row">
 					<div class="cell entry-icon"><img src="cache/{{=sourceHash}}.png" width="16" height="16" alt=""></div>
@@ -60,52 +59,52 @@
 					<article></article>
 				</div>
 			</div>
-        </script>
+		</script>
 
-        <script src="js/pack.js"></script>
+		<script src="js/pack.js"></script>
 
         <script>
             $(document).ready(function() {
-                moment.updateLocale('en', {
-                    calendar: {
-                        lastDay: '[Yesterday]',
-                        sameDay: '[Today]',
-                        nextDay: '[Tomorrow]',
-                        lastWeek: 'dddd, D MMMM',
-                        nextWeek: 'dddd, D MMMM',
-                        sameElse: 'dddd, D MMMM'
-                    }
-                });
+				moment.updateLocale('en', {
+					calendar: {
+						lastDay: '[Yesterday]',
+						sameDay: '[Today]',
+						nextDay: '[Tomorrow]',
+						lastWeek: 'dddd, D MMMM',
+						nextWeek: 'dddd, D MMMM',
+						sameElse: 'dddd, D MMMM'
+					}
+				});
 
 				function clearContent() {
 					$('.entry').removeClass('opened');
 					$('.content > article').empty();
 				}
 
-                function displayFeeds(items) {
-                    var html = '';
-                    var currentDay = moment().startOf('day').add(100, 'years');
-                    var templateDate = new t($('#template-date').html());
-                    var templateItem = new t($('#template-item').html());
+				function displayFeeds(items) {
+					var html = '';
+					var currentDay = moment().startOf('day').add(100, 'years');
+					var templateDate = new t($('#template-date').html());
+					var templateItem = new t($('#template-item').html());
 
-                    function push(data) {
-                        html += data;
-                    }
+					function push(data) {
+						html += data;
+					}
 
-                    function checkDateBreak(date) {
-                        var m = moment.unix(date);
-                        if (m.isSame(currentDay, 'day'))
-                            return;
+					function checkDateBreak(date) {
+						var m = moment.unix(date);
+						if (m.isSame(currentDay, 'day'))
+							return;
 
-                        push(templateDate.render({ date: m.calendar() }));
-                        currentDay = m.startOf('day');
-                    }
+						push(templateDate.render({ date: m.calendar() }));
+						currentDay = m.startOf('day');
+					}
 
-                    for (i = 0; i < items.length; i++) {
-                        var item = items[i];
-                        var date = item['date'];
+					for (i = 0; i < items.length; i++) {
+						var item = items[i];
+						var date = item['date'];
 
-                        checkDateBreak(date);
+						checkDateBreak(date);
 
 						push(templateItem.render({
 							sourceTitle: item['source'],
@@ -116,9 +115,9 @@
 							url: item['url'],
 							excerpt: item['excerpt']
 						}));
-                    }
+					}
 
-                    $('#wrapper').html(html);
+					$('#wrapper').html(html);
 					$('a.entry-clickable').click(function(e) {
 						e.preventDefault();
 
@@ -146,7 +145,7 @@
 							});
 						}
 					});
-                }
+				}
 
 				$.getJSON('feeds.json', function(data) {
 					$('#loader').remove();

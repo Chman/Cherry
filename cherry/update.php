@@ -26,24 +26,24 @@ $logs = array();
 $logs_start = time();
 
 function info($message) {
-	global $logs;
-	$logs[] = '[' . date('Y-m-d H:i:s') . '] - ' . $message;
+    global $logs;
+    $logs[] = '[' . date('Y-m-d H:i:s') . '] - ' . $message;
 }
 
 function logs_as_string($separator = PHP_EOL) {
-	global $logs;
-	return implode($separator, $logs);
+    global $logs;
+    return implode($separator, $logs);
 }
 
 function finish() {
-	if (php_sapi_name() == 'cli') {
-		echo logs_as_string();
-	}
-	else {
-		$log = mb_convert_encoding(logs_as_string('<br>'), 'HTML-ENTITIES', 'UTF-8');
-		echo '<code>' . $log . '</code>';
-	}
-	die();
+    if (php_sapi_name() == 'cli') {
+        echo logs_as_string();
+    }
+    else {
+        $log = mb_convert_encoding(logs_as_string('<br>'), 'HTML-ENTITIES', 'UTF-8');
+        echo '<code>' . $log . '</code>';
+    }
+    die();
 }
 
 // Misc functions
@@ -56,8 +56,8 @@ function in_array_deep($needle, $needle_field, $haystack) {
 function filter_content($content) {
     $c = htmlentities(substr(trim(strip_tags($content)), 0, 128));
 
-	if (strlen($c) == 0)
-		$c = '[...]';
+    if (strlen($c) == 0)
+        $c = '[...]';
 
     return mb_convert_encoding($c, "UTF-8", "HTML-ENTITIES");
 }
@@ -149,8 +149,8 @@ foreach ($feeds as $feed) {
                 continue;
 
             // Skip if item exists
-            if (in_array_deep($id, 'id', $output))
-                continue;
+			if (in_array_deep($id, 'id', $output))
+				continue;
 
 			$item_url = $item->getUrl();
 			$content = '';
